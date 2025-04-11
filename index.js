@@ -61,21 +61,40 @@ const person={
 //   flattenObject(person)
 
 
-function flattenObject(obj, prefix = '') {
-    for (let key in obj) {
-        const value = obj[key];
-        const newKey = prefix ? `${prefix}_${key}` : key;
+// function flattenObject(obj, prefix = '') {
+//     for (let key in obj) {
+//         const value = obj[key];
+        
+//         const newKey = prefix ? `${prefix}_${key}` : key;
 
-        if (typeof value === 'object' && !Array.isArray(value)) {
-            // Recursive call for nested objects
-            flattenObject(value, newKey);
-        } else if (Array.isArray(value)) {
-            // Join array values into a string
-            document.writeln(`${newKey}:${value.join(',')}<br/>`);
-        } else {
-            // Primitive value
-            document.writeln(`${newKey}:${value}<br/>`);
+//         if (typeof value === 'object' && !Array.isArray(value)) {
+//             // Recursive call for nested objects
+//             flattenObject(value, newKey);
+//         } else if (Array.isArray(value)) {
+//             // Join array values into a string
+//             document.writeln(`${newKey}:${value.join(',')}<br/>`);
+//         } else {
+//             // Primitive value
+//             document.writeln(`${newKey}:${value}<br/>`);
+//         }
+//     }
+// }
+// flattenObject(person)
+
+
+function flatObj(obj, nested=''){
+    for(let i in obj){
+        let value=obj[i]
+        let newKey= nested ? `${nested}_${i}`: i
+
+        if(typeof value==="object" && !Array.isArray(value)){
+            flatObj(value,newKey)
+        }else if(Array.isArray(value)){
+            document.writeln(`${newKey}:${value.join(",")}<br/>`)
+        }else{
+            document.writeln(`${newKey}:${value}<br/>`)
         }
     }
 }
-flattenObject(person)
+
+flatObj(person)
